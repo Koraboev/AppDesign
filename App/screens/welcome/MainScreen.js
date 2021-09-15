@@ -1,77 +1,64 @@
-import React from "react";
-import { StyleSheet, Image, View, Text, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Image, View, Text, ScrollView, FlatList, TouchableOpacity } from "react-native";
 import { Foundation, MaterialIcons } from '@expo/vector-icons';
 import colors from "../../config/colors";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 export default function MainScreen() {
 
+    const [flower, setFlower] = useState([
+        {name: 'Dragon Plants', cost: 25.99, id: '1'},
+        {name: 'Ravenea Plants', cost: 20.99, id: '2'},
+        {name: 'Dragon Plants', cost: 25.99, id: '3'},
+        {name: 'Ravenea Plants', cost: 20.99, id: '4'},
+    ]);
+
     return(
-        <ScrollView>
-            <View style={styles.content}>
-            <View style={styles.blogSection}>
-                <View style={styles.blog}>
-                    <View style={styles.iconBlog}>
-                        <Foundation name="heart" size={24} color="tomato" style={styles.iconHeart}/>
+        
+        <FlatList
+            style={styles.content}
+            data={flower}
+            renderItem = {({item}) => (
+                <View style={styles.blogSection}>
+                    <View style={styles.blog}>
+                        <TouchableOpacity style={styles.iconBlog}>
+                            <Foundation name="heart" size={24} color="tomato" style={styles.iconHeart}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.imgBlog}>
+                            <Image source={require('../../assets/images/flower1.png')} style={styles.img}/>
+                        </TouchableOpacity>
+                        <View>
+                            <Text style={styles.textStyle}>{item.name}</Text>
+                            <View style={styles.costBlog}>
+                                <Text style={styles.textStyle}>{item.cost}</Text>
+                                <TouchableOpacity>
+                                    <MaterialIcons name="add" size={24} color="#FFF" style={styles.iconAdd} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
-                    <View style={styles.imgBlog}>
-                        <Image source={require('../../assets/images/flower1.png')} style={styles.img}/>
-                    </View>
-                    <View>
-                        <Text style={styles.textStyle}>Dragon Plant</Text>
-                        <View style={styles.costBlog}>
-                            <Text style={styles.textStyle}>$25.99</Text>
-                            <MaterialIcons name="add" size={24} color="#FFF" style={styles.iconAdd} />
+
+                    <View style={styles.blog}>
+                        <TouchableOpacity style={styles.iconBlog}>
+                            <Foundation name="heart" size={24} color="tomato" style={styles.iconHeart}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.imgBlog}>
+                            <Image source={require('../../assets/images/flower1.png')} style={styles.img}/>
+                        </TouchableOpacity>
+                        <View>
+                            <Text style={styles.textStyle}>{item.name}</Text>
+                            <View style={styles.costBlog}>
+                                <Text style={styles.textStyle}>{item.cost}</Text>
+                                <TouchableOpacity>
+                                    <MaterialIcons name="add" size={24} color="#FFF" style={styles.iconAdd} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 </View>
-                <View style={styles.blog}>
-                    <View style={styles.iconBlog}>
-                        <Foundation name="heart" size={24} color="tomato" style={styles.iconHeart}/>
-                    </View>
-                    <View style={styles.imgBlog}>
-                        <Image source={require('../../assets/images/flower1.png')} style={styles.img}/>
-                    </View>
-                    <View>
-                        <Text style={styles.textStyle}>Dragon Plant</Text>
-                        <View style={styles.costBlog}>
-                            <Text style={styles.textStyle}>$25.99</Text>
-                            <MaterialIcons name="add" size={24} color="#FFF" style={styles.iconAdd} />
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.blog}>
-                    <View style={styles.iconBlog}>
-                        <Foundation name="heart" size={24} color="tomato" style={styles.iconHeart}/>
-                    </View>
-                    <View style={styles.imgBlog}>
-                        <Image source={require('../../assets/images/flower1.png')} style={styles.img}/>
-                    </View>
-                    <View>
-                        <Text style={styles.textStyle}>Dragon Plant</Text>
-                        <View style={styles.costBlog}>
-                            <Text style={styles.textStyle}>$25.99</Text>
-                            <MaterialIcons name="add" size={24} color="#FFF" style={styles.iconAdd} />
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.blog}>
-                    <View style={styles.iconBlog}>
-                        <Foundation name="heart" size={24} color="tomato" style={styles.iconHeart}/>
-                    </View>
-                    <View style={styles.imgBlog}>
-                        <Image source={require('../../assets/images/flower1.png')} style={styles.img}/>
-                    </View>
-                    <View>
-                        <Text style={styles.textStyle}>Dragon Plant</Text>
-                        <View style={styles.costBlog}>
-                            <Text style={styles.textStyle}>$25.99</Text>
-                            <MaterialIcons name="add" size={24} color="#FFF" style={styles.iconAdd} />
-                        </View>
-                    </View>
-                </View>
-            </View>
-        </View>
-        </ScrollView>
+            )}
+        />
+       
     );
 }
 
@@ -80,20 +67,8 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         paddingHorizontal: 20,
     },
-    menuSection: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 10,
-    },
-    menuList: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: colors.gray,
-        paddingVertical: 10,
-    },
     blogSection: {
         flexDirection: 'row',
-        flexWrap: 'wrap',
         justifyContent: 'space-between',
     },
     blog: {
@@ -105,6 +80,14 @@ const styles = StyleSheet.create({
     },
     iconBlog: {
         flexDirection: 'row-reverse',
+    },
+    iconHeart: {
+        backgroundColor: '#F2CDC8',
+        width: 35,
+        height: 35,
+        paddingTop: 6.5,
+        paddingLeft: 8,
+        borderRadius: 35,
     },
     imgBlog: {
         paddingVertical: 10,
@@ -121,14 +104,6 @@ const styles = StyleSheet.create({
     textStyle: {
         fontWeight: 'bold',
         fontSize: 17,
-    },
-    iconHeart: {
-        backgroundColor: '#F2CDC8',
-        width: 35,
-        height: 35,
-        paddingTop: 6.5,
-        paddingLeft: 8,
-        borderRadius: 35,
     },
     iconAdd: {
         backgroundColor: colors.green,
