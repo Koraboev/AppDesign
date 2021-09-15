@@ -1,21 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar,  Platform, SafeAreaView, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import Welcome from './App/screens/welcome/Welcome';
 
 export default function App() {
+
+  console.log(StatusBar.currentHeight);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
+      <SafeAreaView style={styles.container}>
+          <Welcome/>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#3EDC84',
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight:0,
   },
+
 });
